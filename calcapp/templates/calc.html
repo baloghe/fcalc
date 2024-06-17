@@ -1,0 +1,107 @@
+{% extends "index.html" %}
+
+{% block mainContent %}
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Have fun!</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Calc</a>
+        <a class="nav-link" href="#">Triangle</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- result -->
+<div class="col container-sm shadow-inner">
+  <p class="res">{{outRes}}</p>
+</div>
+
+<div class="row align-items-start">
+  
+	<!-- numeric buttons + brackets -->
+	<div class="col container-sm bgrpcnt">
+
+	  <div class="btn-toolbar" role="toolbar" aria-label="tb-b123">
+		<div class="btn-group me-2" role="group" aria-label="b123">
+		  <button id="b1" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-primary">1</button>
+		  <button id="b2" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-secondary">2</button>
+		  <button id="b3" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-success">3</button>
+		</div>
+	  </div>
+	  <div class="btn-toolbar" role="toolbar" aria-label="tb-b456">
+		<div class="btn-group me-2" role="group" aria-label="b456">
+		  <button id="b4" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-danger">4</button>
+		  <button id="b5" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-info">5</button>
+		  <button id="b6" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-primary">6</button>
+		</div>
+	  </div>
+	  <div class="btn-toolbar" role="toolbar" aria-label="tb-b789">
+		<div class="btn-group me-2" role="group" aria-label="b789">
+		  <button id="b7" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-secondary">7</button>
+		  <button id="b8" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-success">8</button>
+		  <button id="b9" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-danger">9</button>
+		</div>
+	  </div>
+	  <div class="btn-toolbar" role="toolbar" aria-label="tb-b0">
+		  <button id="ob" onclick="opClick(this)" type="button" class="btn mr-3 shadow btn-outline-secondary">(</button>
+		  <button id="b0" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-danger">0</button>
+		  <button id="cb" onclick="opClick(this)" type="button" class="btn mr-3 shadow btn-outline-danger">)</button>
+	  </div>
+	</div>
+	
+	<!-- EQUALS -->
+	<div class="col container-sm bgrpcnt">
+	  <div class="btn-toolbar" role="toolbar" aria-label="tb-b0">
+		<div class="btn-group me-2" role="group" aria-label="b123">
+		  <button id="equ" onclick="opClick(this)" type="button" class="btn mr-3 shadow btn-outline-primary">=</sup></button>
+		</div>
+	  </div>
+	</div>
+
+	<!-- operators -->
+	<div class="col container-sm bgrpcnt">
+	  <div class="btn-toolbar" role="toolbar" aria-label="tb-b0">
+		<div class="btn-group me-2" role="group" aria-label="b123">
+		  <button id="pl" onclick="opClick(this)" type="button" class="btn mr-3 shadow btn-outline-primary">+</button>
+		  <button id="po" onclick="opClick(this)" type="button" class="btn mr-3 shadow btn-outline-primary">(.)<sup>n</sup></button>
+		</div>
+	  </div>
+	  <div class="btn-toolbar" role="toolbar" aria-label="tb-b0">
+		<div class="btn-group me-2" role="group" aria-label="b123">
+		  <button id="mi" onclick="opClick(this)" type="button" class="btn mr-3 shadow btn-outline-secondary">-</button>
+		  <button id="ln" onclick="opClick(this)" type="button" class="btn mr-3 shadow btn-outline-secondary">ln(.)</button>
+		</div>
+	  </div>
+	  <div class="btn-toolbar" role="toolbar" aria-label="tb-b0">
+		<div class="btn-group me-2" role="group" aria-label="b123">
+		  <button id="mu" onclick="opClick(this)" type="button" class="btn mr-3 shadow btn-outline-success">*</button>
+		  <button id="sq" onclick="opClick(this)" type="button" class="btn mr-3 shadow btn-outline-success">&Sqrt;</button>
+		</div>
+	  </div>
+	  <div class="btn-toolbar" role="toolbar" aria-label="tb-b0">
+		<div class="btn-group me-2" role="group" aria-label="b123">
+		  <button id="di" onclick="opClick(this)" type="button" class="btn mr-3 shadow btn-outline-success">/</button>
+		  <button id="dc" onclick="numClick(this)" type="button" class="btn mr-3 shadow btn-outline-success">,</button>
+		</div>
+	  </div>
+	</div>
+
+</div>
+
+
+<!-- reflex -->
+<div class="row">
+  <div class="btn-group me-2" role="group" aria-label="b123">
+    <button  id="clr" onclick="clrClick(this)"type="button" class="col btn btn-outline-danger">CLR</button>
+    <p class="col">{{ outExpr }}</p>
+  </div>
+</div>
+<p class="col">{{ outState }}</p>
+
+{% endblock %}

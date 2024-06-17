@@ -1,0 +1,14 @@
+button {
+  height: 55px;
+  font-size: 2rem!important;
+}
+
+.res {
+  font-size: 2rem!important;
+}
+
+.bgrpcnt {
+  display: grid;
+  grid-gap: 18px;
+  padding: 18px;
+}
