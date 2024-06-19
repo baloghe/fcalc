@@ -11,12 +11,13 @@ function numClick(ev){
 		actNum = actNum + ev.id.substr(1);
 	}
 	console.log(actNum)
+	document.getElementById( 'result' ).innerHTML = actNum;
 }
 
 function opClick(ev){
 	
 	const postObj = {
-				 number: parseFloat(actNum),
+				 number: actNum,
 				 symbol: ev.id.toUpperCase()
 			};
 
@@ -30,22 +31,66 @@ function opClick(ev){
 
 function disableButtons(arr){
 	for(let id of arr){
-		document.getElementById( id ).disabled = true;
+		try{
+			document.getElementById( id ).disabled = true;
+		} catch (err) {
+			console.log(`disableButtons :: no such ID in Document: ${id}`);
+		}
 	}
 }
 
 function enableButtons(arr){
 	for(let id of arr){
-		document.getElementById( id ).disabled = false;
+		try{
+			document.getElementById( id ).disabled = false;
+		} catch (err) {
+			console.log(`enableButtons :: no such ID in Document: ${id}`);
+		}
 	}
 }
 
 function refreshData(resp){
-	alert(`resp type=${typeof resp} -> content: ${resp} `);
+	//alert(`resp type=${typeof resp} -> content: ${resp} `);
+	//console.log(`resp :: ${Object.entries(resp)}`);
+	
+	let en = [], di = [], robj = JSON.parse(resp);
+	for(const [key, value] of Object.entries(robj)){
+		if(key != 'RESULT' && key != 'EXPRESSION' && key != 'STATE' ){
+			if(value){
+				en.push( key.toLowerCase() );
+			} else {
+				di.push( key.toLowerCase() );
+			}
+		} else {
+			let v = value || "";
+			if(v=="undefined"){
+				v="";
+			}
+			document.getElementById( key.toLowerCase() ).innerHTML = v;
+		}
+	}
+	
+	enableButtons( en );
+	disableButtons( di );
+	
+	let an = null;
+	try{
+		an = Float.parse(resp.RESULT);
+	} catch(err) {
+		actNum = "";
+	} finally {
+		if(an==null){
+			actNum = "";
+		} else {
+			actNum = resp.RESULT;
+		}
+	}
+	
 }
 
 function clrClick(){
-	//reset number
+	//reset calculator
+	console.log("forget everything")
 	let actNum = "";
 	decsep_enabled = true;
 
