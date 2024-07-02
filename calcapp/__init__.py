@@ -6,20 +6,29 @@ class ProductionConfig:
     FLASK_ENV = "production"
     DEBUG = False
     TESTING = False
+    SECRET_KEY = os.getenv('FLASK_SECRET_KEY')
+
+class DevelopmentConfig:
+    FLASK_ENV = "development"
+    DEBUG = True
+    TESTING = True
+    SECRET_KEY = 'secret-flask-calc'
+
+def get_config_from_env():
+    envname = os.getenv("FLASK_ENV", "development").lower()
+    if envname == "production":
+        return ProductionConfig()
+    return DevelopmentConfig()
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
-        SECRET_KEY=os.urandom(16) # 'dev'
-    )
+    # app.config.from_mapping(
+        # SECRET_KEY=os.urandom(16) # 'dev'
+    # )
+    config = get_config_from_env()
+    app.config.from_object(config)
     # config
-    if test_config is None:
-        # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py', silent=True)
-    else:
-        # load the test config if passed in
-        app.config.from_mapping(test_config)
 
     # ensure the instance folder exists
     try:
